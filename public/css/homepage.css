@@ -297,8 +297,10 @@
 }
 
 .cta-btn.primary:hover {
-  background: var(--accent-purple);
-  box-shadow: var(--neon-glow);
+  color: var(--accent-color);
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 .cta-btn.secondary {
@@ -307,8 +309,10 @@
 }
 
 .cta-btn.secondary:hover {
-  background: var(--accent-color);
-  color: var(--secondary-color);
+  color: var(--accent-color);
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 .learn-btn {
@@ -321,7 +325,10 @@
 }
 
 .learn-btn:hover {
-  background: var(--accent-orange);
+  color: var(--accent-color);
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+  transform: translateY(-2px);
 }
 
 /* ANIMATIONS */
