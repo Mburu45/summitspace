@@ -10,17 +10,30 @@
     </div>
 
     <ul class="navbar-links" id="navbarLinks">
-        <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+        <li><a href="{{ route('home') }}">Home</a></li>
         <li><a href="{{ route('events.index') }}">Events</a></li>
-        <li><a href="{{ route('tickets.index') }}">Tickets</a></li>
-        <li><a href="{{ route('profile.show') }}">Profile</a></li>
-
-        <li>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="logout-btn">Logout</button>
-            </form>
-        </li>
+        @auth
+            <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+            @if(Auth::user()->role === 'admin')
+                <li><a href="{{ route('admin.events.index') }}">Manage Events</a></li>
+                <li><a href="{{ route('reports.index') }}">Reports</a></li>
+            @elseif(Auth::user()->role === 'employee')
+                <li><a href="{{ route('admin.events.index') }}">My Events</a></li>
+                <li><a href="{{ route('reports.index') }}">Reports</a></li>
+            @endif
+            @if(Auth::user()->role === 'user')
+                <li><a href="{{ route('bookings.index') }}">My Bookings</a></li>
+            @endif
+            <li>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="logout-btn">Logout</button>
+                </form>
+            </li>
+        @else
+            <li><a href="{{ route('login') }}">Login</a></li>
+            <li><a href="{{ route('register') }}">Register</a></li>
+        @endauth
     </ul>
 </nav>
 

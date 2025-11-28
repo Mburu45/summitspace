@@ -64,7 +64,7 @@ class EventController extends Controller
 
         $filteredEvents = collect($events)->filter(function ($event) use ($searchTerm, $filterCategory) {
             $matchesSearch = stripos($event['title'], $searchTerm) !== false ||
-                             stripos($event['description'], $searchTerm) !== false;
+                              stripos($event['description'], $searchTerm) !== false;
 
             $matchesCategory = $filterCategory === 'all' || strtolower($event['category']) === strtolower($filterCategory);
 
@@ -72,6 +72,14 @@ class EventController extends Controller
         })->all();
 
         $categories = array_unique(array_map(fn($e) => $e['category'], $events));
+
+        // Handle AJAX requests
+        if ($request->ajax()) {
+            return response()->json([
+                'events' => array_values($filteredEvents),
+                'categories' => $categories
+            ]);
+        }
 
         return view('events.index', compact('filteredEvents', 'categories', 'searchTerm', 'filterCategory'));
     }

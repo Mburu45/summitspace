@@ -9,14 +9,11 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-    Schema::create('tickets', function (Blueprint $table) {
-        $table->id();
-        $table->unsignedBigInteger('event_id');
-        $table->unsignedBigInteger('user_id');
-        $table->timestamps();
-    });
+        Schema::table('events', function (Blueprint $table) {
+            $table->string('category')->default('General')->after('price');
+        });
     }
 
     /**
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tickets');
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropColumn('category');
+        });
     }
 };

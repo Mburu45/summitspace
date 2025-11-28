@@ -43,4 +43,31 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // Relationships
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
+    public function approvedBookings()
+    {
+        return $this->hasMany(Booking::class)->where('status', 'approved');
+    }
+
+    public function pendingBookings()
+    {
+        return $this->hasMany(Booking::class)->where('status', 'pending');
+    }
+
+    // Helper methods
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isOrganizer()
+    {
+        return $this->role === 'organizer';
+    }
 }

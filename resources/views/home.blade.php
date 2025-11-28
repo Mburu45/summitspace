@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.public')
 
 @section('content')
 
@@ -95,9 +95,6 @@
     <a href="{{ route('register') }}" class="cta-btn primary">Join Now</a>
 </section>
 
-@endsection
-
-@section('scripts')
 <script>
     // Countdown Timer JS
     const targetDate = new Date("2025-11-01T00:00:00").getTime();
@@ -120,4 +117,5 @@
 
     setInterval(updateCountdown, 1000);
 </script>
+
 @endsection

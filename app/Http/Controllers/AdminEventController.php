@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 
-class EventController extends Controller
+class AdminEventController extends Controller
 {
     public function index()
     {
@@ -28,7 +28,9 @@ class EventController extends Controller
             'price' => 'required|numeric',
         ]);
 
-        Event::create($request->all());
+        Event::create(array_merge($request->all(), [
+            'created_by' => auth()->id()
+        ]));
 
         return redirect()->route('admin.events.index')->with('success', 'Event created successfully.');
     }
